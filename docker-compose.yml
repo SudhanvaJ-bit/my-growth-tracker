@@ -1,0 +1,16 @@
+# Local PostgreSQL only (the app itself runs with uvicorn and npm).
+# Start:  docker compose up -d      Stop:  docker compose down
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: growth_tracker
+    ports:
+      - "5433:5432"
+    volumes:
+      - growth_tracker_data:/var/lib/postgresql/data
+
+volumes:
+  growth_tracker_data:

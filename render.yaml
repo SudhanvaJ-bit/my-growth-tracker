@@ -1,0 +1,22 @@
+# Render Blueprint for the backend API.
+# In Render: New > Blueprint > pick this repository. You will be asked for the
+# two values marked "sync: false".
+services:
+  - type: web
+    name: my-growth-tracker-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false # paste your managed PostgreSQL connection string
+      - key: CORS_ORIGINS
+        sync: false # your frontend URL, e.g. https://my-growth-tracker.vercel.app

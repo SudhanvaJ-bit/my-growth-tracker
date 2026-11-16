@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme colours as "R G B" so Tailwind can add opacity. */
+:root {
+  --page: 243 245 248;
+  --surface: 255 255 255;
+  --sunken: 236 239 244;
+  --ink: 24 33 47;
+  --muted: 88 99 117;
+  --line: 219 224 232;
+  --accent: 47 91 234;
+  --accent-ink: 255 255 255;
+  --good: 22 128 82;
+  --soft: 142 96 112;
+  color-scheme: light;
+}
+
+.dark {
+  --page: 14 18 28;
+  --surface: 22 28 41;
+  --sunken: 30 37 53;
+  --ink: 231 235 242;
+  --muted: 150 161 180;
+  --line: 41 50 70;
+  --accent: 91 123 240;
+  --accent-ink: 255 255 255;
+  --good: 74 190 135;
+  --soft: 201 150 168;
+  color-scheme: dark;
+}
+
+@layer base {
+  body {
+    @apply bg-page font-sans text-ink antialiased;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-page;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-line bg-surface;
+  }
+  .field {
+    @apply w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm text-ink placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
+  }
+  .label {
+    @apply mb-1 block text-sm font-medium text-ink;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-accent-ink hover:bg-accent/90;
+  }
+  .btn-quiet {
+    @apply btn border border-line bg-surface text-ink hover:bg-sunken;
+  }
+  .icon-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-sunken hover:text-ink;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
